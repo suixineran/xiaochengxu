@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div style="height: 500px">
+<!--  pm2类型-&#45;&#45;-->
+
+  <div style="height: 100px; width: 100%; border: solid red 1px;">
+    <button class="button0"> list</button>
+    <button class="button1"> add</button>
+    <button class="button2"> 修改</button>
+    <button class="button3"> 删除</button>
+    <button class="button4"> 详情</button>
+  </div>
+
+</div>
+
+</body>
+<script>
+  let baseUrl = `http://127.0.0.1:3000/`
+  let module1 = 'dw-work-type'
+  let id = 710
+
+  // list-------
+  let button0 = document.getElementsByClassName('button0')[0]
+  button0.addEventListener('click', () => {
+      console.log('-list view')
+      let data = {
+          start: 20220601,
+          end: 20220701,
+      }
+      fetch(`${baseUrl}${module1}/list`, {
+          method: 'post',
+          data: data,
+      }).then(response => {
+          console.log('响应', response)
+      })
+  })
+
+  // 添加
+  let button1 = document.getElementsByClassName('button1')[0]
+  button1.addEventListener('click', () => {
+      console.log('-----添加-----')
+      // let n = Math.ceil(Math.random())
+      let n = 30;
+      let r = Math.floor(Math.random()*Math.floor(n));
+
+      let n1 = 1000;
+      let r1 = Math.floor(Math.random()*Math.floor(n1));
+      let p = {
+          pid: r,
+          code: r1,
+          name: `${r1}任务类型${r}`,
+          id: `${r1}`,
+      }
+
+      fetch(`${baseUrl}${module1}`, {
+          method: 'post',
+          body: JSON.stringify(p),
+          headers: {'Content-Type': 'application/json'},
+      }).then(response => {
+          console.log('响应', response)
+      })
+  })
+
+  // 修改
+  let button2 = document.getElementsByClassName('button2')[0]
+  button2.addEventListener('click', () => {
+      console.log('-----修改-----')
+      let n1 = 1000;
+      let r1 = Math.floor(Math.random()*Math.floor(n1));
+      let p = {
+          name: `${r1}任务类型-修改成功`,
+          id: 591,
+      }
+      fetch(`${baseUrl}${module1}`, {
+          method: 'put',
+          headers:{
+              'Content-Type':'application/json'
+          },
+          body: JSON.stringify(p),
+      }).then(response => {
+          console.log('响应', response)
+      })
+  })
+
+  // 删除
+  let button3 = document.getElementsByClassName('button3')[0]
+  button3.addEventListener('click', () => {
+      console.log('-----删除-----')
+      fetch(`${baseUrl}${module1}`, {
+          method: 'delete',
+          headers:{
+              'Content-Type':'application/json'
+          },
+          body: JSON.stringify({id:168}),
+      }).then(response => {
+          console.log('响应', response)
+      })
+  })
+
+  // 详情
+  let button4 = document.getElementsByClassName('button4')[0]
+  button4.addEventListener('click', () => {
+      let id = 168
+      fetch(`${baseUrl}${module1}/${id}`, {
+          method: 'get',
+      }).then(response => {
+          console.log('响应', response)
+      })
+  })
+
+</script>
+</html>

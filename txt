@@ -1,0 +1,2 @@
+query 是url里的参数    req.query.id   如果用：id 的形式  也需要用params 的方式接收
+params 是body中的参数
